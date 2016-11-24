@@ -1,6 +1,5 @@
 # Turbolinks
 
-[![Hex Downloads](https://img.shields.io/hexpm/dt/turbolinks.svg)](https://hex.pm/packages/turbolinks)
 [![Hex Version](https://img.shields.io/hexpm/v/turbolinks.svg)](https://hex.pm/packages/turbolinks)
 
 [Docs](https://hexdocs.pm/turbolinks)
