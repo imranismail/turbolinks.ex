@@ -30,3 +30,21 @@ defmodule MyApp.Web do
 end
 ```
 
+in `/web/router.ex`
+```diff
+defmodule MyApp.Router
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+++  plug Turbolinks
+  end
+end
+```
+
+## Handling Redirects
+
+Turbolinks module imports a `redirect/2` function with API parity with phoenix's `redirect/2` function. This provides progressive enhancement when the request is xhr.
+
