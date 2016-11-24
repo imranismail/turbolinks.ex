@@ -27,6 +27,7 @@ defmodule Turbolinks.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:phoenix, "~> 1.2.1", optional: true},
+     {:plug, "~> 1.2", optional: true}]
   end
 end
