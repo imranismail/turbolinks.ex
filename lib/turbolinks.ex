@@ -1,5 +1,7 @@
 defmodule Turbolinks do
   @moduledoc """
+  This plug is built on top of works done by @kagux at https://github.com/kagux/turbolinks_plug
+  
   in `web.ex`
   replace `use Phoenix.Controller` with `use Turbolinks`
 
