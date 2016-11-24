@@ -1,0 +1,2 @@
+defmodule Turbolinks do
+end
