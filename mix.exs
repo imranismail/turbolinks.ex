@@ -32,6 +32,7 @@ defmodule Turbolinks.Mixfile do
 
   defp deps do
     [{:phoenix, "~> 1.2.1", optional: true},
-     {:plug, "~> 1.2", optional: true}]
+     {:plug, "~> 1.2", optional: true},
+     {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 end
