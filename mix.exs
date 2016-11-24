@@ -24,7 +24,7 @@ defmodule Turbolinks.Mixfile do
 
   defp package do
     [name: :turbolinks,
-     files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+     files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Imran Ismail"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/imranismail/turbolinks"}]
