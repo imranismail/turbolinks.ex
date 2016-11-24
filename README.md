@@ -5,6 +5,15 @@
 
 [Docs](https://hexdocs.pm/turbolinks)
 
+## Motive
+> When you visit location /one and the server redirects you to location /two, you expect the browser’s address bar to display the redirected URL.
+
+> However, Turbolinks makes requests using XMLHttpRequest, which transparently follows redirects. There’s no way for Turbolinks to tell whether a request resulted in a redirect without additional cooperation from the server.
+
+> To work around this problem, send the Turbolinks-Location header in response to a visit that was redirected, and Turbolinks will replace the browser’s topmost history entry with the value you provide.
+
+[source](https://github.com/turbolinks/turbolinks#following-redirects)
+
 ## Installation
 Add Turbolinks to your list of dependencies in `mix.exs`:
 
@@ -44,7 +53,12 @@ defmodule MyApp.Router
 end
 ```
 
-## Handling Redirects
+## Redirecting After a Form Submission
 
-Turbolinks module imports a `redirect/2` function with API parity with phoenix's `redirect/2` function. This provides progressive enhancement when the request is xhr.
+Turbolinks module imports a `redirect/2` function with API parity with phoenix's `redirect/2` function. This provides progressive enhancement when we submit a form with XHR.
 
+More details can be found [here](https://github.com/turbolinks/turbolinks#redirecting-after-a-form-submission)
+
+## Unobtrusive JavaScript
+
+TODO
