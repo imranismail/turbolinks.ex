@@ -24,6 +24,38 @@ end
 
 ## Usage with Phoenix
 
+in `package.json`
+```diff
+{
+  "repository": {},
+  "license": "MIT",
+  "scripts": {
+    "deploy": "brunch build --production",
+    "watch": "brunch watch --stdin"
+  },
+  "dependencies": {
+    "phoenix": "file:deps/phoenix",
+    "phoenix_html": "file:deps/phoenix_html",
+++  "turbolinks": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-brunch": "~6.0.0",
+    "brunch": "2.7.4",
+    "clean-css-brunch": "~2.0.0",
+    "css-brunch": "~2.0.0",
+    "javascript-brunch": "~2.0.0",
+    "uglify-js-brunch": "~2.0.1"
+  }
+}
+```
+
+Run `npm install` and update `/web/static/app.js`
+```
+import "phoenix_html"
+++ import Turbolinks from 'turbolinks'
+++ Turbolinks.start()
+```
+
 in `/web/web.ex`
 ```diff
 defmodule MyApp.Web do
@@ -60,4 +92,54 @@ More details can be found [here](https://github.com/turbolinks/turbolinks#redire
 
 ## Unobtrusive JavaScript
 
-TODO
+in `package.json`
+```
+{
+  "repository": {},
+  "license": "MIT",
+  "scripts": {
+    "deploy": "brunch build --production",
+    "watch": "brunch watch --stdin"
+  },
+  "dependencies": {
+    "phoenix": "file:deps/phoenix",
+    "phoenix_html": "file:deps/phoenix_html",
+    "turbolinks": "^5.0.0",
+++  "jquery-ujs": "^1.2.2"
+  },
+  "devDependencies": {
+    "babel-brunch": "~6.0.0",
+    "brunch": "2.7.4",
+    "clean-css-brunch": "~2.0.0",
+    "css-brunch": "~2.0.0",
+    "javascript-brunch": "~2.0.0",
+    "uglify-js-brunch": "~2.0.1"
+  }
+}
+```
+
+Run `npm install` and update `/web/static/app.js`
+
+```diff
+-- import "phoenix_html"
+++ import 'jquery-ujs'
+import Turbolinks from 'turbolinks'
+
+Turbolinks.start()
+```
+
+in `web/templates/layout/app.html.slim`, add these two meta tags
+
+```slim
+++ meta name="csrf-token" content="#{get_csrf_token()}"
+++ meta name="csrf-param" content="_csrf_token"
+```
+
+To submit form remotely set the data-remote html attribute on the form to true, this is an example for phoenix_slim
+
+```slim
+= form_for @changeset, @action, [data: [remote: true]], fn f ->
+  = text_input f, :title, placeholder: "Post title"
+  = text_input f, :body, placeholder: "Post body"
+  = submit "Submit", class: "button is-primary"
+```
