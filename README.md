@@ -93,7 +93,7 @@ More details can be found [here](https://github.com/turbolinks/turbolinks#redire
 ## Unobtrusive JavaScript
 
 in `package.json`
-```
+```diff
 {
   "repository": {},
   "license": "MIT",
@@ -130,7 +130,7 @@ Turbolinks.start()
 
 in `web/templates/layout/app.html.slim`, add these two meta tags
 
-```slim
+```diff
 ++ meta name="csrf-token" content="#{get_csrf_token()}"
 ++ meta name="csrf-param" content="_csrf_token"
 ```
