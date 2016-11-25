@@ -50,7 +50,7 @@ in `package.json`
 ```
 
 Run `npm install` and update `/web/static/app.js`
-```
+```diff
 import "phoenix_html"
 ++ import Turbolinks from 'turbolinks'
 ++ Turbolinks.start()
