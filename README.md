@@ -27,25 +27,13 @@ end
 in `package.json`
 ```diff
 {
-  "repository": {},
-  "license": "MIT",
-  "scripts": {
-    "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin"
-  },
+  ...
   "dependencies": {
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
 ++  "turbolinks": "^5.0.0"
-  },
-  "devDependencies": {
-    "babel-brunch": "~6.0.0",
-    "brunch": "2.7.4",
-    "clean-css-brunch": "~2.0.0",
-    "css-brunch": "~2.0.0",
-    "javascript-brunch": "~2.0.0",
-    "uglify-js-brunch": "~2.0.1"
   }
+  ...
 }
 ```
 
@@ -95,26 +83,30 @@ More details can be found [here](https://github.com/turbolinks/turbolinks#redire
 in `package.json`
 ```diff
 {
-  "repository": {},
-  "license": "MIT",
-  "scripts": {
-    "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin"
-  },
+  ...
   "dependencies": {
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
     "turbolinks": "^5.0.0",
 ++  "jquery-ujs": "^1.2.2"
   },
-  "devDependencies": {
-    "babel-brunch": "~6.0.0",
-    "brunch": "2.7.4",
-    "clean-css-brunch": "~2.0.0",
-    "css-brunch": "~2.0.0",
-    "javascript-brunch": "~2.0.0",
-    "uglify-js-brunch": "~2.0.1"
-  }
+  ...
+}
+```
+
+in `brunch-config.js`
+
+```diff
+{
+  ...
+  npm: {
+    enabled: true,
+++  globals: {
+++    jQuery: 'jquery',
+++    $: 'jquery'
+++  }
+  },
+  ...
 }
 ```
 
