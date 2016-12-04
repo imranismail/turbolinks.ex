@@ -88,6 +88,7 @@ in `package.json`
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",
     "turbolinks": "^5.0.0",
+++  "jquery": "^3.1.0",
 ++  "jquery-ujs": "^1.2.2"
   },
   ...
