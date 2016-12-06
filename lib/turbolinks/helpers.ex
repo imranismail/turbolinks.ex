@@ -23,7 +23,7 @@ defmodule Turbolinks.Helpers do
     |> Plug.Conn.send_resp(conn.status || 200, data)
   end
 
-  defp xhr?(conn) do
+  def xhr?(conn) do
     conn
     |> Plug.Conn.get_req_header("x-requested-with")
     |> List.first

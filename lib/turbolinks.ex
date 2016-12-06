@@ -10,6 +10,7 @@ defmodule Turbolinks do
   """
 
   use Plug.Builder
+  import Turbolinks.Helpers
 
   @session_key "_turbolinks_location"
   @location_header "turbolinks-location"
@@ -25,7 +26,7 @@ defmodule Turbolinks do
       plug :put_new_layout, {Phoenix.Controller.__layout__(__MODULE__, opts), :app}
       plug :put_new_view, Phoenix.Controller.__view__(__MODULE__)
 
-      import Turbolinks.Helpers, only: [redirect: 2, js: 2]
+      import Turbolinks.Helpers
     end
   end
 
