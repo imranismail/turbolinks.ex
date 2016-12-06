@@ -1,7 +1,7 @@
 defmodule Turbolinks do
   @moduledoc """
   This plug is built on top of works done by @kagux at https://github.com/kagux/turbolinks_plug
-  
+
   in `web.ex`
   replace `use Phoenix.Controller` with `use Turbolinks`
 
@@ -37,6 +37,7 @@ defmodule Turbolinks do
     conn
     |> super(opts)
     |> register_before_send(&handle_redirect/1)
+    |> put_phoenix_format()
   end
 
   @doc false
@@ -72,5 +73,13 @@ defmodule Turbolinks do
 
   defp get_referrer_header(conn) do
     get_req_header(conn, @referrer_header)
+  end
+
+  defp put_phoenix_format(conn) do
+    if xhr?(conn) do
+      Phoenix.Controller.put_format(conn, "js")
+    else
+      conn
+    end
   end
 end
