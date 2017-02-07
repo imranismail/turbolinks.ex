@@ -49,7 +49,7 @@ in `/web/web.ex`
 defmodule MyApp.Web do
   def controller do
     quote do
---    use Phoenix.Controller
+      use Phoenix.Controller
 ++    use Turbolinks
       import MyApp.Router.Helpers
       import MyApp.Gettext
