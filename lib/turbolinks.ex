@@ -3,7 +3,7 @@ defmodule Turbolinks do
   This plug is built on top of works done by @kagux at https://github.com/kagux/turbolinks_plug
 
   in `web.ex`
-  replace `use Phoenix.Controller` with `use Turbolinks`
+  add `use Turbolinks`
 
   in `router.ex` add a the plug
   plug Turbolinks
@@ -18,14 +18,7 @@ defmodule Turbolinks do
 
   defmacro __using__(opts) do
     quote bind_quoted: [opts: opts] do
-      import Plug.Conn
       import Phoenix.Controller, except: [redirect: 2]
-
-      use Phoenix.Controller.Pipeline, opts
-
-      plug :put_new_layout, {Phoenix.Controller.__layout__(__MODULE__, opts), :app}
-      plug :put_new_view, Phoenix.Controller.__view__(__MODULE__)
-
       import Turbolinks.Helpers
     end
   end
