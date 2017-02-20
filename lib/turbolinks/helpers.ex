@@ -10,7 +10,7 @@ defmodule Turbolinks.Helpers do
     if xhr?(conn) do
       conn
       |> Plug.Conn.put_status(302)
-      |> js(turbolinks_resp(opts[:to], conn.method))
+      |> js(turbolinks_resp(opts[:to] || opts[:external], conn.method))
     else
       Phoenix.Controller.redirect(conn, opts)
     end
