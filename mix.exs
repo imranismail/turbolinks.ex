@@ -3,7 +3,7 @@ defmodule Turbolinks.Mixfile do
 
   def project do
     [app: :turbolinks,
-     version: "0.3.0",
+     version: "0.3.1",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -31,8 +31,8 @@ defmodule Turbolinks.Mixfile do
   end
 
   defp deps do
-    [{:phoenix, "~> 1.2.1", optional: true},
-     {:plug, "~> 1.2", optional: true},
+    [{:phoenix, "~> 1.0 or ~> 1.2-rc"},
+     {:plug, "~> 1.0"},
      {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 end
