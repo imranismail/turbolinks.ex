@@ -21,7 +21,7 @@ defmodule Turbolinks.Helpers do
   """
   def js(conn, data) do
     conn
-    |> Plug.Conn.put_resp_content_type(Plug.MIME.type("js"))
+    |> Plug.Conn.put_resp_content_type(MIME.type("js"))
     |> Plug.Conn.send_resp(conn.status || 200, data)
   end
 
