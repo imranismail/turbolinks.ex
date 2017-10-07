@@ -10,9 +10,11 @@ defmodule Turbolinks do
   """
 
   use Plug.Builder
+
   import Turbolinks.Helpers
 
-  @session_key "_turbolinks_location"
+  @session_key "turbolinks_location"
+  @original_location_header "location"
   @location_header "turbolinks-location"
   @referrer_header "turbolinks-referrer"
 
@@ -24,9 +26,6 @@ defmodule Turbolinks do
   end
 
   @doc false
-  def init(opts \\ []), do: super(opts)
-
-  @doc false
   def call(conn, opts) do
     conn
     |> super(opts)
@@ -35,34 +34,40 @@ defmodule Turbolinks do
   end
 
   @doc false
-  def handle_redirect(%Plug.Conn{status: status} = conn) when status in 301..302 do
-    location = get_location_header(conn)
-    referrer = get_referrer_header(conn)
-    store_location_in_session(conn, location, referrer)
-  end
-  def handle_redirect(%Plug.Conn{status: status} = conn) when status in 200..299 do
-    conn
-    |> get_session(@session_key)
-    |> set_location_header(conn)
-  end
-  def handle_redirect(conn), do: conn
-
-  defp store_location_in_session(conn, _location, []), do: conn
-  defp store_location_in_session(conn, location, _referrer) do
-    put_session(conn, @session_key, location)
+  def handle_redirect(conn) do
+    case conn.status do
+      status when status in 301..302 ->
+        store_location_in_session(conn)
+      status when status in 200..299 ->
+        conn
+        |> get_session(@session_key)
+        |> set_location_header(conn)
+      _status ->
+        conn
+    end
   end
 
-  defp set_location_header(nil, conn), do: conn
-  defp set_location_header(location, conn) do
-    conn
-    |> put_resp_header(@location_header, location)
-    |> delete_session(@session_key)
+  defp store_location_in_session(conn) do
+    with [_referrer] <- get_referrer_header(conn),
+         [location] <- get_location_header(conn) do
+      put_session(conn, @session_key, location)
+    else
+      [] -> conn
+    end
+  end
+
+  defp set_location_header(conn, location) do
+    if location do
+      conn
+      |> put_resp_header(@location_header, location)
+      |> delete_session(@session_key)
+    else
+      conn
+    end
   end
 
   defp get_location_header(conn) do
-    conn
-    |> get_resp_header("location")
-    |> List.first
+    get_resp_header(conn, @original_location_header)
   end
 
   defp get_referrer_header(conn) do

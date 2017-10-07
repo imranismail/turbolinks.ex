@@ -28,15 +28,19 @@ defmodule Turbolinks.Helpers do
   def xhr?(conn) do
     conn
     |> Plug.Conn.get_req_header("x-requested-with")
-    |> List.first
-    |> Kernel.==("XMLHttpRequest")
+    |> Enum.any?(&(&1 == "XMLHttpRequest"))
   end
 
-  defp turbolinks_resp(to, "GET"), do: "Turbolinks.visit('#{to}');"
-  defp turbolinks_resp(to, _) do
-    """
-    Turbolinks.clearCache();
-    Turbolinks.visit('#{to}');
-    """
+  defp turbolinks_resp(to, method) do
+    if method == "GET" do
+      """
+      Turbolinks.visit('#{to}');
+      """
+    else
+      """
+      Turbolinks.clearCache();
+      Turbolinks.visit('#{to}');
+      """
+    end
   end
 end
