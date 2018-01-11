@@ -124,8 +124,15 @@ Turbolinks.start()
 in `web/templates/layout/app.html.slim`, add these two meta tags
 
 ```diff
-++ meta name="csrf-token" content="#{get_csrf_token()}"
-++ meta name="csrf-param" content="_csrf_token"
+head
+++  meta name="csrf-token" content="#{get_csrf_token()}"
+++  meta name="csrf-param" content="_csrf_token"
+  ...
+--  script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+++  script data-turbolinks-track="reload" src="<%= static_path(@conn, "/js/app.js") %>"
+  ...
+body
+  ...
 ```
 
 To submit form remotely set the data-remote html attribute on the form to true, this is an example for phoenix_slim
@@ -135,4 +142,10 @@ To submit form remotely set the data-remote html attribute on the form to true, 
   = text_input f, :title, placeholder: "Post title"
   = text_input f, :body, placeholder: "Post body"
   = submit "Submit", class: "button is-primary"
+```
+
+To use a remote link like logging out that makes a DELETE call
+
+```slim
+= link(@conn, to: session_path(@conn, :delete), data: [method: :delete, remote: true]
 ```
