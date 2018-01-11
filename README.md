@@ -128,8 +128,8 @@ head
 ++  meta name="csrf-token" content="#{get_csrf_token()}"
 ++  meta name="csrf-param" content="_csrf_token"
   ...
---  script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-++  script data-turbolinks-track="reload" src="<%= static_path(@conn, "/js/app.js") %>"
+--  script src="#{static_path(@conn, "/js/app.js")}"
+++  script data-turbolinks-track="reload" src="#{static_path(@conn, "/js/app.js")}"
   ...
 body
   ...
