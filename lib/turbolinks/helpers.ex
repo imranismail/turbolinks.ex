@@ -28,7 +28,7 @@ defmodule Turbolinks.Helpers do
   def xhr?(conn) do
     conn
     |> Plug.Conn.get_req_header("x-requested-with")
-    |> Enum.any?(&(&1 == "XMLHttpRequest"))
+    |> Enum.any?(&(String.downcase(&1) == "xmlhttprequest"))
   end
 
   defp turbolinks_resp(to, method) do
