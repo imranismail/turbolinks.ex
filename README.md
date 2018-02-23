@@ -18,7 +18,7 @@ Add Turbolinks to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:turbolinks, "~> 0.3.2"}]
+  [{:turbolinks, "~> 0.3.3"}]
 end
 ```
 
