@@ -46,7 +46,7 @@ import "phoenix_html"
 
 in `/web/web.ex`
 ```diff
-defmodule MyApp.Web do
+defmodule Web do
   def controller do
     quote do
       use Phoenix.Controller
@@ -55,12 +55,30 @@ defmodule MyApp.Web do
       import MyApp.Gettext
     end
   end
+
+  def view do
+    quote do
+      use Phoenix.View, root: "lib/web/templates",
+                        namespace: Web
+
+      # Import convenience functions from controllers
+--    import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
+++    import Phoenix.Controller, only: [get_flash: 2, view_module: 1, get_csrf_token: 0]
+
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
+
+      import Web.Router.Helpers
+      import Web.ErrorHelpers
+      import Web.Gettext
+    end
+  end
 end
 ```
 
 in `/web/router.ex`
 ```diff
-defmodule MyApp.Router
+defmodule Web.Router
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
