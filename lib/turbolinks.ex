@@ -56,7 +56,7 @@ defmodule Turbolinks do
     end
   end
 
-  defp set_location_header(conn, location) do
+  defp set_location_header(location, conn) do
     if location do
       conn
       |> put_resp_header(@location_header, location)
