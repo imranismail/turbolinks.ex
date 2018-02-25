@@ -25,6 +25,9 @@ defmodule Turbolinks.Helpers do
     |> Plug.Conn.send_resp(conn.status || 200, data)
   end
 
+  @doc """
+  Check whether it's an ajax request
+  """
   def xhr?(conn) do
     conn
     |> Plug.Conn.get_req_header("x-requested-with")

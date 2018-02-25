@@ -34,14 +34,14 @@ defmodule Turbolinks do
   end
 
   @doc false
-  def handle_redirect(conn) do
+  defp handle_redirect(conn) do
     case conn.status do
       status when status in 301..302 ->
         store_location_in_session(conn)
+
       status when status in 200..299 ->
-        conn
-        |> get_session(@session_key)
-        |> set_location_header(conn)
+        restore_location_from_session(conn)
+
       _status ->
         conn
     end
@@ -56,8 +56,8 @@ defmodule Turbolinks do
     end
   end
 
-  defp set_location_header(location, conn) do
-    if location do
+  defp restore_location_from_session(conn) do
+    if location = get_session(conn, @session_key) do
       conn
       |> put_resp_header(@location_header, location)
       |> delete_session(@session_key)
