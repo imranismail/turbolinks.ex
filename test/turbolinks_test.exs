@@ -2,6 +2,7 @@ defmodule TurbolinksTest do
   use ExUnit.Case
   use Plug.Test
   use Turbolinks
+
   doctest Turbolinks
 
   describe "redirect/2" do
@@ -41,7 +42,7 @@ defmodule TurbolinksTest do
       assert Enum.member?(conn.resp_headers, {"location", "/url"})
       assert conn.status == 302
     end
-    
+
     test "returns the conn with status 308 if :xhr_status is 308" do
       conn =
         conn(:post, "/", "")
