@@ -43,11 +43,11 @@ defmodule TurbolinksTest do
       assert conn.status == 302
     end
 
-    test "returns the conn with status 308 if :xhr_status is 308" do
+    test "returns the conn with status 308 if :status is 308" do
       conn =
         conn(:post, "/", "")
         |> put_req_header("x-requested-with", "XMLHttpRequest")
-        |> redirect(to: "/url", xhr_status: 308)
+        |> redirect(to: "/url", status: 308)
 
       assert conn.status == 308
     end
