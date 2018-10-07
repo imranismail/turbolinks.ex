@@ -1,6 +1,7 @@
 # Turbolinks
 
 [![Hex Version](https://img.shields.io/hexpm/v/turbolinks.svg)](https://hex.pm/packages/turbolinks)
+[![Build Status](https://travis-ci.com/imranismail/turbolinks.ex.svg?branch=master)](https://travis-ci.com/imranismail/turbolinks.ex)
 
 [Docs](https://hexdocs.pm/turbolinks)
 
